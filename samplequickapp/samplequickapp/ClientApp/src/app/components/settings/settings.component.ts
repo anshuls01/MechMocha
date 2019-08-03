@@ -25,13 +25,15 @@ export class SettingsComponent implements OnInit, OnDestroy {
   isPreferencesActivated = false;
   isUsersActivated = false;
   isRolesActivated = false;
-
+  isInterestActivated = true;
   fragmentSubscription: any;
 
   readonly profileTab = 'profile';
   readonly preferencesTab = 'preferences';
+  readonly userInterestTab = 'interest';
   readonly usersTab = 'users';
   readonly rolesTab = 'roles';
+
 
 
   @ViewChild('tab')
@@ -86,7 +88,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.isPreferencesActivated = activeTab == this.preferencesTab;
     this.isUsersActivated = activeTab == this.usersTab;
     this.isRolesActivated = activeTab == this.rolesTab;
-
+    this.isPreferencesActivated = activeTab == this.userInterestTab;
     this.router.navigate([], { fragment: activeTab });
   }
 

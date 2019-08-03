@@ -59,6 +59,7 @@ import { NotificationsViewerComponent } from './components/controls/notification
 import { SearchBoxComponent } from './components/controls/search-box.component';
 import { UserInfoComponent } from './components/controls/user-info.component';
 import { UserPreferencesComponent } from './components/controls/user-preferences.component';
+import { UserInterestComponent } from './components/controls/user-Interest.component';
 import { UsersManagementComponent } from './components/controls/users-management.component';
 import { RolesManagementComponent } from './components/controls/roles-management.component';
 import { RoleEditorComponent } from './components/controls/role-editor.component';
@@ -102,6 +103,7 @@ const agoraConfig: AgoraConfig = {
     OrdersComponent,
     SettingsComponent,
     UsersManagementComponent, UserInfoComponent, UserPreferencesComponent,
+    UserInterestComponent,
     RolesManagementComponent, RoleEditorComponent,
     AboutComponent,
     NotFoundComponent,
