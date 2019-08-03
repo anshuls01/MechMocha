@@ -151,6 +151,10 @@ export class NotificationsViewerComponent implements OnInit, OnDestroy {
         this.alertService.showDialog('Are you sure you want to delete the notification \"' + row.header + '\"?', DialogType.confirm, () => this.deleteNotificationHelper(row));
     }
 
+  Join(row: Notification) {
+    //this.alertService.showDialog(row);
+    console.log(row);
+  }  
 
     deleteNotificationHelper(row: Notification) {
 

@@ -11,14 +11,19 @@
                 <i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i> {{'settings.tab.Profile' | translate}}
               </a>
             </li>
+            <!--<li class="nav-item">
+    <a id="preferencesTab" [routerLink]="[]" fragment="preferences" data-target="#preferences" href="#preferences" class="nav-link" data-toggle="tab" role="tab" aria-controls="preferences">
+      <i class="fa fa-sliders fa-fw" aria-hidden="true"></i> {{'settings.tab.Preferences' | translate}}
+    </a>
+  </li>-->
             <li class="nav-item">
-              <a id="preferencesTab" [routerLink]="[]" fragment="preferences" data-target="#preferences" href="#preferences" class="nav-link" data-toggle="tab" role="tab" aria-controls="preferences">
+              <a id="userInterestTab" [routerLink]="[]" fragment="ineterest" data-target="#interest" href="#interest" class="nav-link" data-toggle="tab" role="tab" aria-controls="interest">
                 <i class="fa fa-sliders fa-fw" aria-hidden="true"></i> {{'settings.tab.Preferences' | translate}}
               </a>
             </li>
             <li class="nav-item">
-              <a id="userInterestTab" [routerLink]="[]" fragment="ineterest" data-target="#interest" href="#interest" class="nav-link" data-toggle="tab" role="tab" aria-controls="interest">
-                <i class="fa fa-sliders fa-fw" aria-hidden="true"></i> {{'settings.tab.Interest' | translate}}
+              <a id="userInterestTab" [routerLink]="[]" fragment="gameinterest" data-target="#gameinterest" href="#gameinterest" class="nav-link" data-toggle="tab" role="tab" aria-controls="gameinterest">
+                <i class="fa fa-sliders fa-fw" aria-hidden="true"></i> Game Interest
               </a>
             </li>
             <li [hidden]="!canViewUsers" class="nav-item">
@@ -41,18 +46,26 @@
               </div>
 
             </div>
-            <div class="tab-pane" id="preferences" role="tabpanel">
+            <!--<div class="tab-pane" id="preferences" role="tabpanel">
               <h4>{{'settings.header.UserPreferences' | translate}}</h4>
               <hr class="separator-hr" />
               <div [@fadeInOut] *ngIf="isPreferencesActivated" class="content-container pl-lg-2">
                 <user-preferences></user-preferences>
               </div>
-            </div>
+            </div>-->
             <div class="tab-pane" id="interest" role="tabpanel">
-              <h4>{{'settings.header.UserInterest' | translate}}</h4>
+              <h4>{{'settings.header.UserPreferences' | translate}}</h4>
               <hr class="separator-hr" />
               <div [@fadeInOut] *ngIf="isInterestActivated" class="content-container pl-lg-2">
                 <user-Interest></user-Interest>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="gameinterest" role="tabpanel">
+              <h4>Game Interest</h4>
+              <hr class="separator-hr" />
+              <div [@fadeInOut] *ngIf="isInterestActivated" class="content-container pl-lg-2">
+                <game-Interest></game-Interest>
               </div>
             </div>
 

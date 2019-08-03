@@ -1,10 +1,37 @@
-<ngx-datatable class="material colored-header sm table table-striped table-hover"
-[loadingIndicator]="loadingIndicator"
-[rows]="rows"
-[rowHeight]="35"
-[headerHeight]="35"
-[footerHeight]="35"
-[columns]="columns"
-[scrollbarV]="true"
-[columnMode]="'force'">
-</ngx-datatable>
+<!--<ngx-datatable class="material colored-header sm table table-striped table-hover"
+               [loadingIndicator]="loadingIndicator"
+               [rows]="rows"
+               [rowHeight]="35"
+               [headerHeight]="35"
+               [footerHeight]="35"
+               [columns]="columns"
+               [scrollbarV]="true"
+               [columnMode]="'force'">
+</ngx-datatable>-->
+
+<div class="material colored-header sm table table-striped table-hover">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Game</th>
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of rows; let i = index">
+
+        <td scope="row">{{i+1}}</td>
+        <td>{{item.userName}}</td>
+        <td>1234</td>
+        <td>
+          <button type="button" (click)="join(item.id)" class="btn btn-primary">
+            <i class='fa fa-hdd-o'>&nbsp;&nbsp;Join</i>
+          </button>
+         
+        </td>
+      </tr>
+  </table>
+</div>
+

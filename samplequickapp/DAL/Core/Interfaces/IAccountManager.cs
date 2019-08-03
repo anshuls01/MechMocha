@@ -27,11 +27,18 @@ namespace DAL.Core.Interfaces
         Task<ApplicationRole> GetRoleLoadRelatedAsync(string roleName);
         Task<List<ApplicationRole>> GetRolesLoadRelatedAsync(int page, int pageSize);
         Task<(ApplicationUser User, string[] Roles)?> GetUserAndRolesAsync(string userId);
+
+        Task<ApplicationUser> updateUserInterest(string userid, string gender, string city, string langauge);
+
         Task<ApplicationUser> GetUserByEmailAsync(string email);
         Task<ApplicationUser> GetUserByIdAsync(string userId);
         Task<ApplicationUser> GetUserByUserNameAsync(string userName);
         Task<IList<string>> GetUserRolesAsync(ApplicationUser user);
         Task<List<(ApplicationUser User, string[] Roles)>> GetUsersAndRolesAsync(int page, int pageSize);
+
+        string JoinChat(ChatSession chatSession);
+        string leavechat(ChatSession chatSession);
+
         Task<(bool Succeeded, string[] Errors)> ResetPasswordAsync(ApplicationUser user, string newPassword);
         Task<bool> TestCanDeleteRoleAsync(string roleId);
         Task<bool> TestCanDeleteUserAsync(string userId);

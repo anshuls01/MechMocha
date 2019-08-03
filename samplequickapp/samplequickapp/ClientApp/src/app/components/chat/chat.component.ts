@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc'; // Add
 
 @Component({
@@ -93,6 +93,11 @@ export class ChatComponent {
         console.log(`${evt.uid} left from this channel`);
       }
     });
+   
   }
-
+  onJoinEvent(isSucess: boolean) {
+    if (isSucess) {
+      this.startCall();
+    }
+  }
 }

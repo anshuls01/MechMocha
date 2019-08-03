@@ -92,6 +92,88 @@ namespace samplequickapp.Controllers
         }
 
 
+        [HttpGet("joinchat")]
+        [AllowAnonymous]
+        public IActionResult joinChat(string userid,string currentuserid,string ChatId,string GameId)
+        {
+            try
+            {
+
+                ChatSession chatSession = new ChatSession()
+                {
+                    UserId = userid,
+                    Active = true,
+                    ChatId = ChatId,
+                    GameId = GameId,
+                };
+
+                
+                var results = _accountManager.JoinChat(chatSession);
+
+                chatSession = new ChatSession()
+                {
+                    UserId = currentuserid,
+                    Active = true,
+                    ChatId = ChatId,
+                    GameId = GameId,
+                };
+
+                results = _accountManager.JoinChat(chatSession);
+
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Failed to join chat, {ex.Message}");
+            }
+        }
+
+
+        [HttpGet("leavechat")]
+        [AllowAnonymous]
+        public IActionResult leavechat(string userid, string currentuserid, string ChatId, string GameId)
+        {
+            try
+            {
+
+                ChatSession chatSession = new ChatSession()
+                {
+                    UserId = userid,
+                    Active = true,
+                    ChatId = ChatId,
+                    GameId = GameId,
+                };
+
+
+                var results = _accountManager.leavechat(chatSession);
+
+                chatSession = new ChatSession()
+                {
+                    UserId = currentuserid,
+                    Active = true,
+                    ChatId = ChatId,
+                    GameId = GameId,
+                };
+
+                results = _accountManager.leavechat(chatSession);
+
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Failed to join chat, {ex.Message}");
+            }
+        }
+
+
+        [HttpGet("userInterest")]
+        [AllowAnonymous]
+        [ProducesResponseType(200, Type = typeof(List<UserViewModel>))]
+        public async Task<IActionResult> userInterest(string userid, string gender, string city, string langauge)
+        {
+            return await GetUsers(-1, -1);
+        }
+
         [HttpGet("matchedusers")]
         [AllowAnonymous]
         [ProducesResponseType(200, Type = typeof(List<UserViewModel>))]
@@ -119,6 +201,27 @@ namespace samplequickapp.Controllers
             }
 
             return Ok(usersVM);
+        }
+
+
+        
+        [ProducesResponseType(200, Type = typeof(List<UserViewModel>))]
+        public async Task<IActionResult> UpdateUserInterest(string userid, string gender, string city, string langauge)
+        {
+            var usersAndRoles = await _accountManager.updateUserInterest( userid,  gender,  city,  langauge);
+
+            //List<UserViewModel> usersVM = new List<UserViewModel>();
+
+            //foreach (var item in usersAndRoles)
+            //{
+            //    var userVM = Mapper.Map<UserViewModel>(item.User);
+            //    userVM.Roles = item.Roles;
+
+            //    usersVM.Add(userVM);
+            //}
+
+            //return Ok(usersVM);
+            return Ok();
         }
 
 

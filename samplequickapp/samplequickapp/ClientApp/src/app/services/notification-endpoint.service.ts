@@ -145,6 +145,23 @@ export class NotificationEndpoint {
     }
 
 
+  joinchat<T>(notificationId: number): Observable<T> {
+
+    const notification = this.demoNotifications.find(val => val.id == notificationId);
+    let response: HttpResponse<T>;
+
+    if (notification) {
+      this.demoNotifications = this.demoNotifications.filter(val => val.id != notificationId);
+      response = this.createResponse<T>(notification, 200);
+    } else {
+      response = this.createResponse<T>(null, 404);
+    }
+
+    return of(response.body);
+  }
+
+
+
 
     private createResponse<T>(body, status: number) {
         return new HttpResponse<T>({ body: body, status: status });

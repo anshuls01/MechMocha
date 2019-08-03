@@ -95,6 +95,8 @@ export class NotificationService {
 
 
 
+  
+
   deleteNotification(notificationOrNotificationId: number | Notification): Observable<Notification> {
 
     if (typeof notificationOrNotificationId === 'number' || notificationOrNotificationId instanceof Number) { // Todo: Test me if its check is valid

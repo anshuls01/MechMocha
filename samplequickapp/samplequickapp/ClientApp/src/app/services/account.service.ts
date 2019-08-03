@@ -85,6 +85,11 @@ export class AccountService {
     return this.accountEndpoint.getUpdateUserPreferencesEndpoint(configuration);
   }
 
+  updateUserInterest(userid:string,gender: string, city: string, langauge:string) {
+    return this.accountEndpoint.updateUserInterest(userid,gender, city, langauge);
+  }
+
+
 
   deleteUser(userOrUserId: string | User): Observable<User> {
 

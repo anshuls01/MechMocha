@@ -1,0 +1,87 @@
+<div>
+  <div class="form-group row">
+    <label for="refreshButton" class="col-sm-3 col-form-label">Reload Preference</label>
+    <div class="col-sm-4">
+      <button id="refreshButton" class="btn btn-outline-secondary" (click)="reloadFromServer()">
+        <i class="fa fa-refresh"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="separator-hr" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="language" class="col-sm-3 col-form-label">Language </label>
+    <div class="col-sm-4">
+      <select id="language" [(ngModel)]="language" #languageSelector="bootstrap-select" bootstrapSelect class="selectpicker form-control">
+        <option value="1">English</option>
+        <option value="2">Hindi</option>
+        <option value="3">Other</option>
+      </select>
+    </div>
+    <div class="col-sm-5">
+      <p class="form-control-plaintext text-muted small">{{'preferences.LanguageHint' | translate}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="separator-hr" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="city" class="col-sm-3 col-form-label">City </label>
+    <div class="col-sm-4">
+      <select id="city" [(ngModel)]="city" #languageSelector="bootstrap-select" bootstrapSelect class="selectpicker form-control">
+        <option value="1">Lucknow</option>
+        <option value="2">Aligarh</option>
+        <option value="3">Shimoga</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="separator-hr" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="gender" class="col-sm-3 col-form-label">Gender </label>
+    <div class="col-sm-4">
+      <select id="gender" [(ngModel)]="gender" #languageSelector="bootstrap-select" bootstrapSelect class="selectpicker form-control">
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+        <option value="3">Not Disclose</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <hr class="separator-hr" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+
+    </div>
+    <div class="col-sm-9">
+      <div class="row float-left">
+        <div class="col-sm-6 col-reset-default">
+          <button type="button" (click)="resetDefault()" class="btn btn-success">
+            <i class='fa fa-circle-o-notch'></i> Reset Default
+          </button>
+        </div>
+        <div class="col-sm-6 col-set-default">
+          <button type="button" (click)="setAsDefault()" class="btn btn-primary">
+            <i class='fa fa-hdd-o'></i> Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

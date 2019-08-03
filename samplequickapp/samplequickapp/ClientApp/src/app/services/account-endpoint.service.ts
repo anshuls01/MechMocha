@@ -20,6 +20,7 @@ export class AccountEndpoint extends EndpointFactory {
   private readonly _userByUserNameUrl: string = '/api/account/users/username';
   private readonly _currentUserUrl: string = '/api/account/users/me';
   private readonly _currentUserPreferencesUrl: string = '/api/account/users/me/preferences';
+  private readonly _currentUserInterestUrl: string = '/api/account/userInterest';
   private readonly _unblockUserUrl: string = '/api/account/users/unblock';
   private readonly _rolesUrl: string = '/api/account/roles';
   private readonly _roleByRoleNameUrl: string = '/api/account/roles/name';
@@ -30,6 +31,7 @@ export class AccountEndpoint extends EndpointFactory {
   get userByUserNameUrl() { return this.configurations.baseUrl + this._userByUserNameUrl; }
   get currentUserUrl() { return this.configurations.baseUrl + this._currentUserUrl; }
   get currentUserPreferencesUrl() { return this.configurations.baseUrl + this._currentUserPreferencesUrl; }
+  get currentUserInterestUrl() { return this.configurations.baseUrl + this._currentUserInterestUrl; }
   get unblockUserUrl() { return this.configurations.baseUrl + this._unblockUserUrl; }
   get rolesUrl() { return this.configurations.baseUrl + this._rolesUrl; }
   get roleByRoleNameUrl() { return this.configurations.baseUrl + this._roleByRoleNameUrl; }
@@ -138,6 +140,14 @@ export class AccountEndpoint extends EndpointFactory {
         return this.handleError(error, () => this.getUpdateUserPreferencesEndpoint(configuration));
       }));
   }
+  updateUserInterest<T>(userid:string,gender: string, city: string, langauge: string): Observable<T> {
+    return this.http.put<T>(this.currentUserInterestUrl + '?userid='+userid+'gender=' + gender + '&city=' + city + '&langauge=' + langauge, this.getRequestHeaders()).pipe<T>(
+      catchError(error => {
+        return this.handleError(error, () => this.updateUserInterest(userid,gender, city, langauge));
+      }));
+  }
+
+  
 
   getUnblockUserEndpoint<T>(userId: string): Observable<T> {
     const endpointUrl = `${this.unblockUserUrl}/${userId}`;

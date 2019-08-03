@@ -25,6 +25,8 @@ namespace DAL
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
+        public DbSet<ChatSession> ChatSession { get; set; }
+
 
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
@@ -69,6 +71,23 @@ namespace DAL
             builder.Entity<OrderDetail>().ToTable($"App{nameof(this.OrderDetails)}");
             builder.Entity<OrderDetail>().Property(p => p.UnitPrice).HasColumnType(priceDecimalType);
             builder.Entity<OrderDetail>().Property(p => p.Discount).HasColumnType(priceDecimalType);
+
+            builder.Entity<ChatSession>(entity =>
+            {
+                entity.Property(e => e.ChatId)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.GameId)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .HasDefaultValueSql("('')");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasDefaultValueSql("('')");
+            });
         }
 
 

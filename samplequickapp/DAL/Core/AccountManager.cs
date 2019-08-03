@@ -389,5 +389,36 @@ namespace DAL.Core
             var result = await _roleManager.DeleteAsync(role);
             return (result.Succeeded, result.Errors.Select(e => e.Description).ToArray());
         }
+
+        public Task<ApplicationUser> updateUserInterest(string userid, string gender, string city, string langauge)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string JoinChat(ChatSession chatSession)
+        {
+            //ChatSession chatSession = new ChatSession();
+            _context.ChatSession.Add(chatSession);
+            return _context.SaveChanges().ToString();
+             
+        }
+
+        public string leavechat(ChatSession chatSession)
+        {
+            string result = "0";
+            //ChatSession chatSession = new ChatSession();
+            ChatSession chat = _context.ChatSession.Where(x => x.Active == true && x.GameId == chatSession.GameId
+           && x.UserId == chatSession.UserId
+           && x.ChatId == chatSession.ChatId).First();
+            if (chat != null)
+            {
+                chat.Active = false;
+                _context.Update(chat);
+
+            }
+            return result; 
+
+        }
+
     }
 }

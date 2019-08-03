@@ -60,12 +60,14 @@ import { SearchBoxComponent } from './components/controls/search-box.component';
 import { UserInfoComponent } from './components/controls/user-info.component';
 import { UserPreferencesComponent } from './components/controls/user-preferences.component';
 import { UserInterestComponent } from './components/controls/user-Interest.component';
+import { GameInterestComponent } from './components/controls/game-Interest.component';
 import { UsersManagementComponent } from './components/controls/users-management.component';
 import { RolesManagementComponent } from './components/controls/roles-management.component';
 import { RoleEditorComponent } from './components/controls/role-editor.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { AngularAgoraRtcModule, AgoraConfig } from 'angular-agora-rtc'; // Add
 import { SideBarUserComponent } from './components/controls/sideBarUserControl.component';
+import { CustomService } from './services/customService';
 const agoraConfig: AgoraConfig = {
   AppID: 'a455d32628924a0aa93f34ac3f12ffa7',
 };
@@ -104,6 +106,7 @@ const agoraConfig: AgoraConfig = {
     SettingsComponent,
     UsersManagementComponent, UserInfoComponent, UserPreferencesComponent,
     UserInterestComponent,
+    GameInterestComponent,
     RolesManagementComponent, RoleEditorComponent,
     AboutComponent,
     NotFoundComponent,
@@ -123,6 +126,10 @@ const agoraConfig: AgoraConfig = {
   ],
   providers: [
     { provide: ErrorHandler, useClass: AppErrorHandler },
+    {
+      provide: 'BASE_URL', useFactory: getBaseUrl
+    },
+    CustomService,
     AlertService,
     ThemeManager,
     ConfigurationService,
@@ -138,4 +145,8 @@ const agoraConfig: AgoraConfig = {
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export function getBaseUrl() {
+  return document.getElementsByTagName('base')[0].href;
 }

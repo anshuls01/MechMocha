@@ -5,4 +5,6 @@
   <div class="remote_calls" *ngFor="let remote of remoteCalls;" [id]="remote">
   </div>
 </div>
-<button (click)="startCall()">Start Call</button>
+<!--<button (click)="startCall()">Start Call</button>-->
+
+<app-sideuser (isSuccess)="onJoinEvent($event)"></app-sideuser>
