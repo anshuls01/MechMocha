@@ -47,6 +47,11 @@ export class AccountService {
     return this.accountEndpoint.getUsersEndpoint<User[]>(page, pageSize);
   }
 
+  getMatchedUsers() {
+
+    return this.accountEndpoint.getMatchUserEndpoint<User[]>();
+  }
+
   getUsersAndRoles(page?: number, pageSize?: number) {
 
     return forkJoin(
@@ -104,7 +109,7 @@ export class AccountService {
 
 
   userHasPermission(permissionValue: PermissionValues): boolean {
-    return this.permissions.some(p => p == permissionValue);
+    return this.permissions.some(p => p === permissionValue);
   }
 
 

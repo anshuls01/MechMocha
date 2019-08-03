@@ -16,6 +16,7 @@ import { ConfigurationService } from './configuration.service';
 export class AccountEndpoint extends EndpointFactory {
 
   private readonly _usersUrl: string = '/api/account/users';
+  private readonly _matchedusersUrl: string = '/api/account/matchedusers';
   private readonly _userByUserNameUrl: string = '/api/account/users/username';
   private readonly _currentUserUrl: string = '/api/account/users/me';
   private readonly _currentUserPreferencesUrl: string = '/api/account/users/me/preferences';
@@ -25,6 +26,7 @@ export class AccountEndpoint extends EndpointFactory {
   private readonly _permissionsUrl: string = '/api/account/permissions';
 
   get usersUrl() { return this.configurations.baseUrl + this._usersUrl; }
+  get matchedusersUrl() { return this.configurations.baseUrl + this._matchedusersUrl; }
   get userByUserNameUrl() { return this.configurations.baseUrl + this._userByUserNameUrl; }
   get currentUserUrl() { return this.configurations.baseUrl + this._currentUserUrl; }
   get currentUserPreferencesUrl() { return this.configurations.baseUrl + this._currentUserPreferencesUrl; }
@@ -40,6 +42,15 @@ export class AccountEndpoint extends EndpointFactory {
     super(http, configurations, injector);
   }
 
+
+  getMatchUserEndpoint<T>(): Observable<T> {
+    const endpointUrl = this.matchedusersUrl;
+
+    return this.http.get<T>(endpointUrl, this.getRequestHeaders()).pipe<T>(
+      catchError(error => {
+        return this.handleError(error, () => this.getMatchUserEndpoint());
+      }));
+  }
 
 
 

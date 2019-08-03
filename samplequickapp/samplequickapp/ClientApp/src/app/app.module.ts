@@ -64,7 +64,7 @@ import { RolesManagementComponent } from './components/controls/roles-management
 import { RoleEditorComponent } from './components/controls/role-editor.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { AngularAgoraRtcModule, AgoraConfig } from 'angular-agora-rtc'; // Add
-
+import { SideBarUserComponent } from './components/controls/sideBarUserControl.component';
 const agoraConfig: AgoraConfig = {
   AppID: 'a455d32628924a0aa93f34ac3f12ffa7',
 };
@@ -108,6 +108,7 @@ const agoraConfig: AgoraConfig = {
     NotificationsViewerComponent,
     SearchBoxComponent,
     ChatComponent,
+    SideBarUserComponent,
     StatisticsDemoComponent, TodoDemoComponent, BannerDemoComponent,
     EqualValidator,
     LastElementDirective,

@@ -92,6 +92,15 @@ namespace samplequickapp.Controllers
         }
 
 
+        [HttpGet("matchedusers")]
+        [AllowAnonymous]
+        [ProducesResponseType(200, Type = typeof(List<UserViewModel>))]
+        public async Task<IActionResult> MatchedUsers()
+        {
+            return await GetUsers(-1, -1);
+        }
+
+
         [HttpGet("users/{pageNumber:int}/{pageSize:int}")]
         [Authorize(Authorization.Policies.ViewAllUsersPolicy)]
         [ProducesResponseType(200, Type = typeof(List<UserViewModel>))]
