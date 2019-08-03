@@ -6,7 +6,7 @@
 import { Component } from '@angular/core';
 import { fadeInOut } from '../../services/animations';
 import { ConfigurationService } from '../../services/configuration.service';
-
+import { ChatComponent } from '../chat/chat.component';
 
 @Component({
     selector: 'home',

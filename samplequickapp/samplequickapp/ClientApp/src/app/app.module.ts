@@ -62,13 +62,18 @@ import { UserPreferencesComponent } from './components/controls/user-preferences
 import { UsersManagementComponent } from './components/controls/users-management.component';
 import { RolesManagementComponent } from './components/controls/roles-management.component';
 import { RoleEditorComponent } from './components/controls/role-editor.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { AngularAgoraRtcModule, AgoraConfig } from 'angular-agora-rtc'; // Add
 
-
+const agoraConfig: AgoraConfig = {
+  AppID: 'a455d32628924a0aa93f34ac3f12ffa7',
+};
 
 
 @NgModule({
   imports: [
     BrowserModule,
+    AngularAgoraRtcModule.forRoot(agoraConfig), // Add
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
@@ -102,6 +107,7 @@ import { RoleEditorComponent } from './components/controls/role-editor.component
     NotFoundComponent,
     NotificationsViewerComponent,
     SearchBoxComponent,
+    ChatComponent,
     StatisticsDemoComponent, TodoDemoComponent, BannerDemoComponent,
     EqualValidator,
     LastElementDirective,

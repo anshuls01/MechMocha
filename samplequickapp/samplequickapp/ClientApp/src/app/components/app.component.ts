@@ -18,7 +18,7 @@ import { AuthService } from '../services/auth.service';
 import { ConfigurationService } from '../services/configuration.service';
 import { Permission } from '../models/permission.model';
 import { LoginComponent } from '../components/login/login.component';
-
+import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc'; // Add
 const alertify: any = require('../assets/scripts/alertify.js');
 
 
@@ -28,7 +28,7 @@ const alertify: any = require('../assets/scripts/alertify.js');
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-
+  localStream: Stream;
   isAppLoaded: boolean;
   isUserLoggedIn: boolean;
   shouldShowLoginModal: boolean;
