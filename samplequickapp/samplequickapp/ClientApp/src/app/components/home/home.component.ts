@@ -3,10 +3,11 @@
 // www.ebenmonney.com/templates
 // =============================
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { fadeInOut } from '../../services/animations';
 import { ConfigurationService } from '../../services/configuration.service';
 import { ChatComponent } from '../chat/chat.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'home',
@@ -14,7 +15,12 @@ import { ChatComponent } from '../chat/chat.component';
     styleUrls: ['./home.component.scss'],
     animations: [fadeInOut]
 })
-export class HomeComponent {
-    constructor(public configurations: ConfigurationService) {
+export class HomeComponent implements OnInit {
+  public userLogin: boolean = false;
+  ngOnInit(): void {
+    this.userLogin = this.authservice.isLoggedIn;
+    }
+  constructor(public configurations: ConfigurationService, private authservice: AuthService) {
+
     }
 }
