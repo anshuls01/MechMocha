@@ -53,8 +53,8 @@ namespace samplequickapp.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetUserById(string id)
         {
-            if (!(await _authorizationService.AuthorizeAsync(this.User, id, AccountManagementOperations.Read)).Succeeded)
-                return new ChallengeResult();
+            //if (!(await _authorizationService.AuthorizeAsync(this.User, id, AccountManagementOperations.Read)).Succeeded)
+            //    return new ChallengeResult();
 
 
             UserViewModel userVM = await GetUserViewModelHelper(id);

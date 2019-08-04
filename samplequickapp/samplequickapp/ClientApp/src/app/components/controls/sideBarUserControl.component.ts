@@ -19,11 +19,13 @@ import { userInfo } from 'os';
 
 export class SideBarUserComponent implements OnInit {
   @Output() isSuccess: EventEmitter<string> = new EventEmitter<string>();
-  public ChatId: string ='';
+  public ChatId: string = '';
   public GameId: number = 0;
   columns: any[] = [];
   title = 'Player(s)';
   loadingIndicator: boolean;
+    public usename: string = '';
+
   rowsCache: User[] = [];
   rows: User[] = [];
   allRoles: Role[] = [];
@@ -81,7 +83,15 @@ export class SideBarUserComponent implements OnInit {
     this.alertService.showStickyMessage('Load Error', `Unable to retrieve users from the server.\r\nErrors: "${Utilities.getHttpResponseMessages(error)}"`,
       MessageSeverity.error, error);
   }
+  onUserLoadSuccessful(users: User) {
+    this.alertService.stopLoadingMessage();
 
+    this.loadingIndicator = false;
+
+    this.usename = users.userName;
+    this.isSuccess.emit(this.GameId.toString() + '$' + this.usename);
+
+  }
 
   onDataLoadSuccessful(users: User[]) {
     this.alertService.stopLoadingMessage();
@@ -90,17 +100,17 @@ export class SideBarUserComponent implements OnInit {
 
     var index = users.findIndex(x => x.email == this.accountService.currentUser.email);
     if (index != -1)
-      users.splice(index, 1);     
-    
+      users.splice(index, 1);
+
 
     users.forEach((user, index, users) => {
-        (<any>user).index = index + 1;
+      (<any>user).index = index + 1;
     });
 
     this.rowsCache = [...users];
     this.rows = users;
 
-    
+
   }
 
   getGUID() {
@@ -112,7 +122,6 @@ export class SideBarUserComponent implements OnInit {
   }
 
   join(id: string, index: number) {
-    let usename: string = '';
     console.log(id);
     console.log(this.accountService.currentUser.id);
     if (index % 2 == 0) {
@@ -125,22 +134,22 @@ export class SideBarUserComponent implements OnInit {
       result => {
         var value = result;
         console.log(result);
-        this.accountService.getUser(id).subscribe(user => { usename=user.userName });
+        this.accountService.getUser(id).subscribe(user => this.onUserLoadSuccessful(user));
 
-        this.isSuccess.emit(this.GameId.toString() + '$' + usename);
+        
       },
       error => {
         this.errorMessage = <any>error
-        this.isSuccess.emit('0$' + usename);
-        console.log(this.errorMessage );
+        this.isSuccess.emit('0$' + this.usename);
+        console.log(this.errorMessage);
         this.alertService.showMessage("Join Chat", this.errorMessage, MessageSeverity.error);
       });
   }
 
- leave(id: string) {
+  leave(id: string) {
     console.log(id);
-   console.log(this.accountService.currentUser.id);
-   this.customService.leaveChat(id, this.accountService.currentUser.id, this.ChatId, this.GameId.toString()).subscribe(
+    console.log(this.accountService.currentUser.id);
+    this.customService.leaveChat(id, this.accountService.currentUser.id, this.ChatId, this.GameId.toString()).subscribe(
       result => {
         var value = result;
       },

@@ -145,8 +145,8 @@ export class ChatComponent implements OnInit {
     else
       this.currentuserscoreArray += 10;
 
-    if (this.userscoreArray == 100 || this.currentuserscoreArray == 100) {
-      if (this.userscoreArray == 100) {
+    if (this.userscoreArray >= 100 || this.currentuserscoreArray >= 100) {
+      if (this.userscoreArray >= 100) {
         this.winMessage = this.username + ' Wins!';
         this.winner = this.username;
       }
@@ -177,7 +177,7 @@ export class ChatComponent implements OnInit {
         this.Joined = false;
       });
 
-      this.Joined == false;
+      this.Joined = false;
     }
   }
   setGameRule() {

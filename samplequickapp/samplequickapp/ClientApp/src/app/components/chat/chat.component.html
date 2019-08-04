@@ -23,13 +23,13 @@
       <div class="card-body">
         <h5 class="card-title">Playing {{gameName}}</h5>
         <p class="card-text">{{gameText}}</p>
-        <a (click)="addScore(username)" class="btn btn-primary">{{username}}</a>
+        <a href="#" (click)="addScore(username)" *ngIf="username!==''" class="btn btn-primary text-white">{{username}}</a>
         &nbsp;&nbsp;
-        <a (click)="addScore(currentusername)" class="btn btn-primary">{{currentusername}}</a>
+        <a href="#" (click)="addScore(currentusername)" *ngIf="currentusername!==''"  class="btn btn-primary text-white">{{currentusername}}</a>
       </div>
       <div class="card-footer text-muted">
-        <span *ngIf="userScore>0 ||currentUserScore>0 ">
-          Users Score&nbsp;<b>{{username}}:{{userScore}}</b> &nbsp;&nbsp;&nbsp;<b>{{currentusername}}:{{currentUserScore}}</b>
+        <span *ngIf="userscoreArray>0 ||currentuserscoreArray>0 ">
+          Users Score&nbsp;<b>{{username}}:{{userscoreArray}}</b> &nbsp;&nbsp;&nbsp;<b>{{currentusername}}:{{currentuserscoreArray}}</b>
         </span>
       </div>
     </div>
