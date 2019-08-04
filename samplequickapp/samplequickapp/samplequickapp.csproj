@@ -15,6 +15,7 @@
     <PackageProjectUrl>https://www.ebenmonney.com/quickapp</PackageProjectUrl>
     <Company>EBENMONNEY</Company>
     <Version>2.7.2</Version>
+    <UserSecretsId>68f88692-66cb-40c4-bf48-56bc22fe8594</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

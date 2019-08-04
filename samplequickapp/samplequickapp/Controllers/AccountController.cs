@@ -50,6 +50,7 @@ namespace samplequickapp.Controllers
         [ProducesResponseType(200, Type = typeof(UserViewModel))]
         [ProducesResponseType(403)]
         [ProducesResponseType(404)]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUserById(string id)
         {
             if (!(await _authorizationService.AuthorizeAsync(this.User, id, AccountManagementOperations.Read)).Succeeded)

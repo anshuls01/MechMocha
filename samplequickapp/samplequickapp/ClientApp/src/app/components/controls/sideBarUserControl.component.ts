@@ -9,6 +9,7 @@ import { AlertService, DialogType, MessageSeverity } from 'src/app/services/aler
 import { Utilities } from 'src/app/services/utilities';
 import { AppTranslationService } from '../../services/app-translation.service';
 import { CustomService } from 'src/app/services/customService';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-sideuser',
@@ -17,9 +18,9 @@ import { CustomService } from 'src/app/services/customService';
 })
 
 export class SideBarUserComponent implements OnInit {
-  @Output() isSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() isSuccess: EventEmitter<string> = new EventEmitter<string>();
   public ChatId: string ='';
-  public GameId: string='';
+  public GameId: number = 0;
   columns: any[] = [];
   title = 'Player(s)';
   loadingIndicator: boolean;
@@ -110,20 +111,27 @@ export class SideBarUserComponent implements OnInit {
     });
   }
 
-  join(id: string) {
+  join(id: string, index: number) {
+    let usename: string = '';
     console.log(id);
     console.log(this.accountService.currentUser.id);
-    this.GameId = "1234";
+    if (index % 2 == 0) {
+      this.GameId = 1234;
+    }
+    else
+      this.GameId = 1235;
     this.ChatId = this.getGUID();
-    this.customService.JoinChat(id, this.accountService.currentUser.id, this.ChatId, this.GameId).subscribe(
+    this.customService.JoinChat(id, this.accountService.currentUser.id, this.ChatId, this.GameId.toString()).subscribe(
       result => {
         var value = result;
         console.log(result);
-        this.isSuccess.emit(true);
+        this.accountService.getUser(id).subscribe(user => { usename=user.userName });
+
+        this.isSuccess.emit(this.GameId.toString() + '$' + usename);
       },
       error => {
         this.errorMessage = <any>error
-        this.isSuccess.emit(false);
+        this.isSuccess.emit('0$' + usename);
         console.log(this.errorMessage );
         this.alertService.showMessage("Join Chat", this.errorMessage, MessageSeverity.error);
       });
@@ -131,8 +139,8 @@ export class SideBarUserComponent implements OnInit {
 
  leave(id: string) {
     console.log(id);
-    console.log(this.accountService.currentUser.id);
-   this.customService.leaveChat(id, this.accountService.currentUser.id,this.ChatId, this.GameId).subscribe(
+   console.log(this.accountService.currentUser.id);
+   this.customService.leaveChat(id, this.accountService.currentUser.id, this.ChatId, this.GameId.toString()).subscribe(
       result => {
         var value = result;
       },

@@ -1,10 +1,40 @@
+<div class="row clearfix">
+  <div class="col-sm-5 float-sm-left">
+    <div id="agora_local">
+    </div>
+    <div class="remote-containers">
+      <div class="remote_calls" *ngFor="let remote of remoteCalls;" [id]="remote">
+      </div>
+    </div>
+  </div>
+  <div class="col-2">&nbsp;</div>
+  <div class="col-sm-5 float-sm-left" *ngIf="!Joined">
+    <div *ngIf="winMessage!==''">
+      <span>Last Game Win By:{{winner}}, Join again to play</span>
+    </div>
+    <app-sideuser (isSuccess)="onJoinEvent($event)"></app-sideuser>
+  </div>
 
-<div id="agora_local">
-</div>
-<div class="remote-containers">
-  <div class="remote_calls" *ngFor="let remote of remoteCalls;" [id]="remote">
+  <div class=" col-sm-5 float-sm-left" *ngIf="Joined">
+    <div class="card text-center">
+      <div class="card-header">
+        Gaming Console
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Playing {{gameName}}</h5>
+        <p class="card-text">{{gameText}}</p>
+        <a (click)="addScore(username)" class="btn btn-primary">{{username}}</a>
+        &nbsp;&nbsp;
+        <a (click)="addScore(currentusername)" class="btn btn-primary">{{currentusername}}</a>
+      </div>
+      <div class="card-footer text-muted">
+        <span *ngIf="userScore>0 ||currentUserScore>0 ">
+          Users Score&nbsp;<b>{{username}}:{{userScore}}</b> &nbsp;&nbsp;&nbsp;<b>{{currentusername}}:{{currentUserScore}}</b>
+        </span>
+      </div>
+    </div>
   </div>
 </div>
-<!--<button (click)="startCall()">Start Call</button>-->
 
-<app-sideuser (isSuccess)="onJoinEvent($event)"></app-sideuser>
+
+<!--<button (click)="startCall()">Start Call</button>-->
